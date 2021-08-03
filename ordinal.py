@@ -77,10 +77,11 @@ class Ordinal():
                     result = rank[0]
                 equals += rank[1]
                 # this subordinate continues the chain of confusion if it answers to superiors
-                if len(superiors_asking) > 0:
+                # if it sees itself in equals, however, it realises not to be confused
+                if len(superiors_asking) > 0 and self not in equals:
                     confused = True                
         # decide what to return based on confusion
-        if confused and self not in equals:
+        if confused:
             return [result, equals]
         return result
 
